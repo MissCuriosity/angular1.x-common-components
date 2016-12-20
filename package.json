@@ -1,0 +1,38 @@
+{
+  "name": "athena",
+  "version": "0.0.1",
+  "description": "Components for angularJs.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MissCuriosity/angular1.x-common-components.git"
+  },
+  "keywords": [
+    "angularJs",
+    "Component"
+  ],
+  "author": "Ye Chang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caishenwang/athena/issues"
+  },
+  "homepage": "https://github.com/MissCuriosity/angular1.x-common-components#readme",
+  "devDependencies": {
+    "browser-sync": "^2.17.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-flatten": "^0.3.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0",
+    "jshint": "^2.9.3"
+  }
+}
