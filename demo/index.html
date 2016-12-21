@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>angular1.x-common-components</title>
+</head>
+<body ng-controller="MainCtrl as main"
+      style="background: #fff;padding-top: 50px;">
+<!--demo view-->
+<script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/angular/angular.min.js"></script>
+<script>
+    angular
+            .module('myModule')
+            .controller('MainCtrl', MainCtrl);
+
+    function MainCtrl() {
+        var vm = this;
+    }
+</script>
+</body>
+</html>
