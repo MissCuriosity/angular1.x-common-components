@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="athena">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Page title set in pageTitle directive -->
+    <title>Athena demo page</title>
+
+    <!-- Bootstrap -->
+    <link href="http://cdn.cshen.cn/INSPINIA-v2.6.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font awesome -->
+    <link href="http://cdn.cshen.cn/INSPINIA-v2.6.2/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Toastr -->
+    <link href="http://cdn.cshen.cn/INSPINIA-v2.6.2/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+
+    <!-- Main Inspinia CSS files -->
+    <link href="http://cdn.cshen.cn/INSPINIA-v2.6.2/css/animate.css" rel="stylesheet">
+    <link id="loadBefore" href="http://cdn.cshen.cn/INSPINIA-v2.6.2/css/style.min.css" rel="stylesheet">
+
+    <!-- date-picker -->
+    <link href="http://cdn.cshen.cn/INSPINIA-v2.6.2/css/plugins/datapicker/angular-datapicker.css" rel="stylesheet">
+
+    <link href="/dist/css/athena.css" rel="stylesheet">
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body ng-controller="MainCtrl as main" style="background: #fff;padding-top: 50px;">
+    <!-- Main view  -->
+    <!--<div ui-view></div>-->
+    <div ng-include="'menu-selector/menu-selector.html'"></div>
+    <div ng-include="'simple-table/simple-table.html'"></div>
+    <div ng-include="'auto-complete/auto-complete.html'"></div>
+    <div ng-include="'date-picker/date-picker.html'"></div>
+
+    <!-- jQuery and Bootstrap -->
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/plugins/jquery-ui/jquery-ui.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/inspinia.js"></script>
+
+    <!-- Main Angular scripts-->
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2//js/plugins/moment/moment.min.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/angular/angular.min.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/angular/angular-sanitize.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/plugins/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/angular-translate/angular-translate.min.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/ui-router/angular-ui-router.min.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/plugins/angular-idle/angular-idle.js"></script>
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/angular/angular-cookies.min.js"></script>
+
+    <!-- date-picker -->
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/plugins/datapicker/angular-datepicker.js"></script>
+
+    <script src="http://cdn.cshen.cn/INSPINIA-v2.6.2/js/angular/angular-sanitize.js"></script>
+
+    <!-- Anglar App Script -->
+    <script src="/dist/js/athena.js"></script>
+    <script src="/dist/js/templates.js"></script>
+    <script src="auto-complete/auto-complete.mock.js"></script>
+    <script src="menu-selector/menu-selector.mock.js"></script>
+    <script src="date-picker/date-picker.mock.js"></script>
+    <script src="simple-table/simple-table.mock.js"></script>
+    <script>
+        angular
+            .module('athena')
+            .controller('MainCtrl', MainCtrl);
+
+        function MainCtrl() {
+            var vm = this;
+
+            // auto-complete
+            vm.autoCompleteList1 = autoCompleteTextItemList;
+            vm.autoCompleteList2 = autoCompleteTextItemList;
+            vm.autoCompleteList3 = autoCompleteTextItemList;
+            vm.selectedItem1 = vm.autoCompleteList1[0];
+            vm.selectedItem2 = null;
+            vm.selectedItem3 = null;
+            vm.keywords = '';
+
+            // menu-selector
+            vm.menuSelectorItemList = menuSelectorItemList;
+
+            // date-picker
+            vm.defaultDate = defaultDate;
+
+            // simple-table
+            vm.tableConfig = tableConfig;
+            vm.tableData = tableData;
+
+            init();
+
+            function init() {
+            }
+        }
+    </script>
+
+</body>
+</html>
