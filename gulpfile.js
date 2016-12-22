@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var projectName = 'athena';
+var projectName = 'tomato';
 
 var htmlminConfig = {
     collapseWhitespace: true
