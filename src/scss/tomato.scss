@@ -1,7 +1,10 @@
-@import 'base/reset';
-@import 'base/table';
+//abstracts
 @import 'abstracts/variables';
-@import '../components/auto-complete/auto-complete';
-@import '../components/menu-selector/menu-selector';
-@import '../components/date-picker/date-picker';
-@import '../components/simple-table/simple-table';
+
+//base
+@import 'base/reset';
+@import 'base/common';
+
+//components
+@import 'components/_table';
+//@import '../components/date-picker/date-picker';
