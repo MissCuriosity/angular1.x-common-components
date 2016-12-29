@@ -64,10 +64,10 @@
                               class="{{ col.color | tableColor: item }}"
                               ng-bind-html="item | tableReadonly: col.key: col.type">
                         </span>
-                        <a class="' btn btn-xs ' && {{ col.color | tableColor: item }}"
-                           ng-if="col.type === 'orderStatus'"
-                           ng-bind-html="item | orderStatus: table.isWarehouseStep"
-                           ng-click="col.onOperation($event, item)">{{ col.color }}</a>
+                        <!--<a class="' btn btn-xs ' && {{ col.color | tableColor: item }}"-->
+                           <!--ng-if="col.type === 'orderStatus'"-->
+                           <!--ng-bind-html="item | orderStatus"-->
+                           <!--ng-click="col.onOperation($event, item)">{{ col.color }}</a>-->
                         <!-- uri-->
                         <a ng-if="col.type === 'uri' && col.linkUri"
                            class="{{ col.color | tableColor: item }}"

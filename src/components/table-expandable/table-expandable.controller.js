@@ -5,16 +5,10 @@ angular
     .module('tomato.tableExpandable')
     .controller('TableExpandableCtrl', TableExpandableCtrl);
 
-TableExpandableCtrl.$inject = ['$scope'];
+TableExpandableCtrl.$inject = ['$scope', '$filter'];
 
-function TableExpandableCtrl($scope) {
+function TableExpandableCtrl($scope, $filter) {
     var vm = this;
-    var targetUser = null;
-    var warehouseId = null;
-    var warehouseSubjectStepList = null;
-    //var isWarehouseStep = null;
-
-    vm.isWarehouseStep = null;
 
     vm.checkLast = checkLast;
     vm.changeAllCheckbox = changeAllCheckbox;
@@ -23,38 +17,6 @@ function TableExpandableCtrl($scope) {
     init();
 
     function init() {
-        getUserInfo();
-        getToken();
-    }
-
-    function getUserInfo() {
-        targetUser = Order.getUserInfo();
-        if ( !targetUser ){
-            Order.
-                getTargetUser()
-                .success(function(response) {
-                    if ( response.status === 0 ) {
-                        targetUser = response.data;
-                        warehouseId = targetUser.warehouse.id;
-                        getWarehouseStep();
-                        //warehouseId = 'ebe45f09-1599-91fe-6898-19e78c9ea1fa';
-                    }
-                });
-        } else {
-            warehouseId = targetUser.warehouse.id;
-            getWarehouseStep();
-            //warehouseId = 'ebe45f09-1599-91fe-6898-19e78c9ea1fa';
-        }
-    }
-
-    function getWarehouseStep() {
-        Order
-            .getWarehouseStep()
-            .success(function(response) {
-                warehouseSubjectStepList = response.data;
-                //warehouseId = 'b5a1d2dc-40f5-3b5d-8971-3d8964d96d33';
-                vm.isWarehouseStep = warehouseSubjectStepList[warehouseId];
-            });
     }
 
     function checkLast($last) {
