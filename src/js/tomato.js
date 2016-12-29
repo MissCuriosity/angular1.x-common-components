@@ -4,3 +4,4 @@ angular.module('tomato', [
 ]);
 
 angular.module('tomato.templates', []);
+angular.module('tomato.filters', []);
