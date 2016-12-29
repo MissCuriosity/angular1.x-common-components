@@ -1,10 +1,140 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div class="scroll-table">
 
-</body>
-</html>
+    <div class="table-thead-fix">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th width="28" ng-if="table.tableConfig.isDetail"></th>
+                <th width="50" ng-if="!table.tableConfig.isCheckBox">序号</th>
+                <th width="80" ng-if="table.tableConfig.isCheckBox">
+                    <span class="checkbox checkbox-primary">
+                        <input type="checkbox"
+                               ng-model="table.allCheck"
+                               ng-change="table.changeAllCheckbox()"
+                               id="change-all">
+                        <label for="change-all">全选</label>
+                    </span>
+                </th>
+                <th width="{{ ::title.width }}" ng-repeat="title in table.tableConfig">{{ ::title.label }}</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="table-body">
+        <table class="table table-striped table-bordered table-hover">
+            <tbody ng-if="!table.itemList">
+            <tr>
+                <td colspan="100" class="text-center">查询中……</td>
+            </tr>
+            </tbody>
+            <tbody ng-if="table.itemList.length <= 0 && table.itemList">
+            <tr>
+                <td colspan="100" class="text-center">没有结果</td>
+            </tr>
+            </tbody>
+
+            <tbody ng-repeat="item in table.itemList track by $index"
+                   ng-init="p_index = $index"
+                   ng-init="table.checkLast($last)"
+                   ng-if="table.itemList.length > 0">
+            <tr class="{{ 'cursor-hands' && ( table.tableConfig.trClass | tableColor: item ) }}"
+                ng-class="{ 'tr-selected': item.isSelected }"
+                ng-click="table.tableConfig.onClick(item, $event)">
+                <td width="28" ng-if="table.tableConfig.isDetail">
+                    <i class="fa"
+                       ng-class="{'fa-angle-down': item.isShowDetail,'fa-angle-right': !item.isShowDetail}"></i>
+                </td>
+                <td width="50" ng-if="!table.tableConfig.isCheckBox">{{ $index + 1 }}</td>
+                <td width="80"
+                    ng-click="table.changeCheckbox($event, item)"
+                    ng-if="table.tableConfig.isCheckBox">
+                    <span class="checkbox checkbox-primary">
+                        <input type="checkbox"
+                               ng-show="table.tableConfig.isCheckBox"
+                               ng-model="item.checked"
+                               ng-click="table.changeCheckbox($event, item, 'checkbox')">
+                        <label>{{ $index + 1 }}</label>
+                    </span>
+                </td>
+                <td width="{{ ::col.width }}" ng-repeat="col in table.tableConfig">
+                    <!-- !editable-->
+                    <div ng-if="!col.editable">
+                        <!-- !img type-->
+                        <span ng-if="col.type && col.type !== 'img'"
+                              class="{{ col.color | tableColor: item }}"
+                              ng-bind-html="item | tableReadonly: col.key: col.type">
+                        </span>
+                        <a class="' btn btn-xs ' && {{ col.color | tableColor: item }}"
+                           ng-if="col.type === 'orderStatus'"
+                           ng-bind-html="item | orderStatus: table.isWarehouseStep"
+                           ng-click="col.onOperation($event, item)">{{ col.color }}</a>
+                        <!-- uri-->
+                        <a ng-if="col.type === 'uri' && col.linkUri"
+                           class="{{ col.color | tableColor: item }}"
+                           ui-sref="{{ ::item | tableLinkUri: col }}" target="_blank"> {{ item[col.key] }} </a>
+                        <a ng-if="col.type === 'uri' && !col.linkUri"
+                           class="{{ col.color | tableColor: item }}"> {{ item[col.key] }} </a>
+
+                        <button class="btn btn-xs"
+                                ng-class="{ 'btn-warning': item.style === 'warning' }"
+                                ng-show="item.style === 'warning' && col.type === 'uri'">{{ item | weightStatus }}</button>
+                        <button class="btn btn-xs"
+                                ng-class="{ 'btn-danger': item.style === 'danger' }"
+                                ng-show="item.style === 'danger' && col.type === 'uri'">{{ item | oweStatus }}</button>
+                        <!-- img-->
+                        <img ng-src="{{ item[col.key] | thumbnail: 20 }}"
+                             ng-click="col.onImgClick($event, item)" ng-if="col.type == 'img'"/>
+                    </div>
+                    <!-- editable-->
+                    <div ng-if="col.editable">
+                          <span>
+                                <input class="form-control width-auto"
+                                       type="text"
+                                       style="width: {{col.editableConfig.width}}px"
+                                       placeholder="{{ ::col.label }}"
+                                       ng-model="item[col.key]"
+                                       ng-change="col.editableConfig.onInputChange($event, item[col.key])"
+                                       ng-focus="col.editableConfig.onInputFocus($event, item[col.label])"
+                                       ng-click="col.editableConfig.onInputClick($event, item[col.label])"
+                                       ng-model-options="{updateOn:'default blur',debounce:{default:500,blur:0}}">
+                            </span>
+                    </div>
+                    <!-- operable-->
+                    <div ng-if="col.operable">
+                        <button type="button"
+                                ng-repeat="btn in col.operationList"
+                                ng-if="btn.type !== 'uploads' && btn.enable | tableOperation: item"
+                                class="' btn btn-xs btn-vertical ' && {{ btn.color | tableColor: item }}"
+                                ng-click="btn.onOperation($event, item, p_index)">{{ ::btn.label }}
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr class="table-detail" ng-if="item.isShowDetail">
+                <!-- subtable-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- footer-->
+    <div class="table-footer-fix" ng-if="table.itemList.length > 0 && table.tableConfig.isFooter">
+        <table class="table table-striped table-bordered table-hover">
+            <tbody class="{{ table.tableConfig.footer.color | tableColor }}">
+            <tr>
+                <td width="28" ng-if="table.tableConfig.isDetail"></td>
+                <td width="80">合计</td>
+                <td width="{{ ::col.width }}"
+                    ng-repeat="col in table.tableConfig">
+                    <span ng-if="col.footer">
+                        {{ table.tableConfig.footer | tableReadonly: col.footer.key: col.type }}
+                    </span>
+                    <!--{{ ::col.footer.value }}-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
