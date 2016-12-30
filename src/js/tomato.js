@@ -1,6 +1,7 @@
 angular.module('tomato', [
     'tomato.tableExpandable',
     'tomato.filters',
+    'tomato.directives',
     'ngSanitize'
 ]);
 
