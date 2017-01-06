@@ -1,8 +1,5 @@
-/**
- * @author zhangboxuan@thinkerx.com
- */
 angular
-    .module('athena.datePicker', [])
+    .module('tomato.datePicker', [])
     .component('datePicker', {
         templateUrl: 'date-picker.view.html',
         controller: 'DatePickerCtrl',

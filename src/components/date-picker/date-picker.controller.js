@@ -1,8 +1,5 @@
-/**
- * @author zhangboxuan@thinkerx.com
- */
 angular
-.module('athena.datePicker')
+.module('tomato.datePicker')
 .controller('DatePickerCtrl', DatePickerCtrl);
 
 DatePickerCtrl.$inject = ['$scope', 'DATE_PICKER_TYPE'];
