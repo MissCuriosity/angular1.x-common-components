@@ -1,5 +1,6 @@
 angular.module('tomato', [
     'tomato.tableExpandable',
+    'tomato.datePicker',
     'tomato.filters',
     'tomato.directives',
     'ngSanitize'
